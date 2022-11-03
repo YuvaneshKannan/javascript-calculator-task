@@ -1,3 +1,4 @@
+// ====================================================TASK 1=============================================================
 function calculation() {
     var f_No = document.getElementById("fNo");
     var s_No = document.getElementById("lNo");
@@ -14,16 +15,12 @@ function calculation() {
 
 }
 
-
+// ========================================================TASK 2=================================================================================
 
 var f_No1 = document.getElementById("frNo");
 var s_No1 = document.getElementById("laNo");
 var btn = document.getElementById("btn")
 var validation = document.getElementById("validation");
-// btn.addEventListener('click', () => {
-
-// })
-
 
 s_No1.addEventListener('keyup', () => {
     (Number(f_No1.value) > Number(s_No1.value)) ? validation.innerHTML = "Plz enter higher value": validation.innerHTML = "";
@@ -52,7 +49,10 @@ function open3() {
 
 
 function myFunction() {
-    var obj = { evenArr: [], oddArr: [] }
+    var obj = {
+        evenArr: [],
+        oddArr: []
+    }
     var oddNo = 0
     var evenNo = 0
     for (let i = Number(f_No1.value); i <= s_No1.value; i++) {
@@ -70,56 +70,38 @@ function myFunction() {
         "<p>Even numbers b/w the two inputfield are " + obj.evenArr + "</p>" +
         "<p>Odd numbers b/w the two inputfield are " + obj.oddArr + "</p>" +
         "<p>The sum of even num is " + evenNo + "</p>" + "<p>The sum of odd num is " + oddNo + "</p>";
-
-
 }
-var textarea = document.getElementById("text")
-var btn = document.getElementById("btn")
+// ======================================================================TASK 3=======================================================================
 
-function result() {
-    document.getElementById('print').innerHTML = ""
-    var text_value = document.getElementById("text");
-    var trim_value = text_value.value.trim().split(" ").join("");
-    var ori = trim_value;
-    var ori_len = trim_value.length;
-    var totlen = trim_value.length;
-    var chararr = trim_value.split("");
-    console.log(chararr)
-    var charlen
-    for (let i = 0; i < chararr.length; i++) {
-        ori = ori.replaceAll(chararr[i], '');
-        console.log(ori)
-        charlen = ori_len - ori.length;
-        ori_len = ori.length;
-        if (charlen == 0) {
-            console.log(charlen);
-        } else {
-            if (document.getElementById('print').innerHTML == "") {
-                document.getElementById('print').innerHTML = "<p> The length in the text is " + totlen + "</p>" + "<p> The " + chararr[i] + " length in the text is " + charlen + "</p>"
-            } else {
-                document.getElementById('print').innerHTML += "<p> The " + chararr[i] + " length in the text is " + charlen + "</p>"
+var textarea = document.getElementById("char");
+
+textarea.addEventListener('keyup', () => {
+    document.getElementById("print").innerHTML = "";
+    var char = textarea.value
+
+    if (char.length == 0) {
+        console.log("Invalid string")
+        return;
+    }
+
+    for (let i = 0; i < char.length; i++) {
+        let count = 0;
+        for (let j = 0; j < char.length; j++) {
+            if (char[i] == char[j] && i > j) {
+                break;
+            }
+            if (char[i] == char[j]) {
+                count++;
             }
         }
-    }
-    // })
-}
-// function odd_even_calculation() {
-//     var obj = { evenArr: [], oddArr: [] }
-//     var oddNo = 0
-//     var evenNo = 0
-//     for (let i = Number(f_No1.value); i <= s_No1.value; i++) {
-//         if (i % 2 == 0) {
-//             obj.evenArr.push(i);
-//             evenNo += i;
-//         } else {
-//             obj.oddArr.push(i);
-//             oddNo += i;
+        if (count > 0) {
+            if (document.getElementById("print").innerHTML == "") {
+                document.getElementById("print").innerHTML = "<p>The total length in the text is:<b> " + char.length + "</b></p>" +
+                    "<p>the" + "&nbsp&nbsp" + (`${char[i]}`) + "&nbsp&nbsp" + " length in the text:<b> " + (`${count}`); + "</b></p>"
+            } else {
+                document.getElementById("print").innerHTML += "<p>the" + "&nbsp&nbsp" + (`${char[i]}`) + "&nbsp&nbsp" + " length in the text:<b> " + (`${count}`); + "</b></p>"
+            }
+        }
 
-//         }
-//     }
-//     document.getElementById('odd_even_calc').innerHTML = "<p>The sum of total numbers b/w the two inputfield is " + (evenNo + oddNo) + "</p>" +
-//         "<p>The total numbers b/w the two inputfield is " + (Number(obj.evenArr.length) + Number(obj.oddArr.length)) + "</p>" +
-//         "<p>Even numbers b/w the two inputfield are " + obj.evenArr + "</p>" +
-//         "<p>Odd numbers b/w the two inputfield are " + obj.oddArr + "</p>" +
-//         "<p>The sum of even num is " + sum_of_evenNo + "</p>" + "<p>The sum of odd num is " + sum_of_oddNo + "</p>";
-// }
+    }
+})
